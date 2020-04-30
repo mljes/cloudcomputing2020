@@ -1,0 +1,386 @@
+---
+swagger: "2.0"
+info:
+  description: Textbook Sharing Service API Documentation
+  version: "1.0"
+  title: Sharebook
+host: virtserver.swaggerhub.com
+basePath: /mljes/LaaS/1.0
+tags:
+- name: ad
+  description: Advertisement for Textbooks
+- name: review
+  description: A review of a textbook. Attached to an ad.
+- name: user
+- name: login
+- name: createAccount
+- name: deleteAccount
+schemes:
+- https
+- http
+paths:
+  /ads:
+    get:
+      tags:
+      - ad
+      summary: Gets all advertisements listed for textbooks.
+      description: This endpoint uses get request to retrieve all ads.
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        "200":
+          description: Successful Operation
+          schema:
+            $ref: '#/definitions/Ad'
+        "404":
+          description: No advertisements could be found
+    post:
+      tags:
+      - ad
+      summary: Creates an advertisement on the page with form data.
+      description: This endpoint uses a post request to create an advertisement.
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: adData
+        description: Data for new ad.
+        required: true
+        schema:
+          $ref: '#/definitions/Ad'
+      responses:
+        "405":
+          description: Invalid input
+  /ads/id:
+    get:
+      tags:
+      - ad
+      summary: Retrieves an advertisement by its ID
+      description: This endpoint uses get request to retrieve an ad belonging to a given ID.
+      produces:
+      - application/json
+      parameters:
+      - name: adId
+        in: path
+        description: ID of advertisement to be retrieved.
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Successful Operation
+          schema:
+            $ref: '#/definitions/Ad'
+        "404":
+          description: No advertisement could be found
+    put:
+      tags:
+      - ad
+      summary: Update an existing advertisement.
+      description: This endpoint uses a put request to update an advertisement.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: adId
+        in: path
+        description: ID of advertisement to be retrieved.
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: Advertisement that needs to be updated.
+        required: true
+        schema:
+          $ref: '#/definitions/Ad'
+      responses:
+        "200":
+          description: Successful Operation
+        "404":
+          description: Advertisement not found
+    delete:
+      tags:
+      - ad
+      summary: Deletes an existing advertisement.
+      description: This endpoint uses a delete request to delete an advertisement.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: adId
+        in: path
+        description: ID of advertisement to be deleted.
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Successful Operation
+        "404":
+          description: Advertisement not found
+  /reviews:
+    get:
+      tags:
+      - review
+      summary: Gets all reviews listed for textbooks.
+      description: This endpoint uses get request to retrieve all reviews.
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        "200":
+          description: Successful Operation
+          schema:
+            $ref: '#/definitions/Review'
+        "404":
+          description: No reviews could be found
+    post:
+      tags:
+      - review
+      summary: Creates a review for a request with form data.
+      description: This endpoint uses a post request to create a review.
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: reviewData
+        description: Data for review to be posted
+        required: true
+        schema:
+          $ref: '#/definitions/Review'
+      responses:
+        "200":
+          description: Successful Operation
+        "405":
+          description: Invalid input
+  /reviews/id:
+    get:
+      tags:
+      - review
+      summary: Gets all reviews for a given textbook.
+      description: This endpoint uses get request to retrieve all reviews for a textbook.
+      produces:
+      - application/json
+      parameters:
+      - name: adid
+        in: path
+        description: ID of review to retrieve a review for
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Successful Operation
+          schema:
+            $ref: '#/definitions/Review'
+        "404":
+          description: No review could be found for given ID
+    put:
+      tags:
+      - review
+      summary: Update an existing review.
+      description: This endpoint uses a put request to update a review.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: reviewId
+        in: path
+        description: ID of review to be updated
+        required: true
+        type: string
+      - in: body
+        name: reviewData
+        description: New review data to complete update.
+        required: true
+        schema:
+          $ref: '#/definitions/Review'
+      responses:
+        "200":
+          description: Successful Operation
+        "404":
+          description: Review not found
+    delete:
+      tags:
+      - review
+      summary: Deletes an existing review.
+      description: This endpoint uses a delete request to delete a review.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: reviewId
+        in: path
+        description: ID of review to be deleted.
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Successful Operation
+        "404":
+          description: Review not found
+  /user:
+    get:
+      tags:
+      - user
+      summary: Gets all users.
+      description: This endpoint uses get request to retrieve all users.
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        "200":
+          description: Successful Operation
+          schema:
+            $ref: '#/definitions/User'
+        "404":
+          description: No users could be found
+  /users/id:
+    get:
+      tags:
+      - user
+      summary: Retrieves a user by its ID
+      description: This endpoint uses get request to retrieve an user belonging to a given ID.
+      produces:
+      - application/json
+      parameters:
+      - name: adId
+        in: path
+        description: ID of user to be retrieved.
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Successful Operation
+          schema:
+            $ref: '#/definitions/User'
+        "404":
+          description: No user could be found
+    put:
+      tags:
+      - user
+      summary: Update an existing user's information.
+      description: This endpoint uses a put request to update user's information.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: reviewId
+        in: path
+        description: ID of user to be updated
+        required: true
+        type: string
+      - in: body
+        name: reviewData
+        description: New user data to complete update.
+        required: true
+        schema:
+          $ref: '#/definitions/User'
+      responses:
+        "200":
+          description: Successful Operation
+        "404":
+          description: User not found
+  /createAccount:
+    post:
+      tags:
+      - createAccount
+      summary: Creates a user using form data.
+      description: This endpoint uses a post request to create a user.
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: userData
+        description: Data for user to be posted
+        required: true
+        schema:
+          $ref: '#/definitions/User'
+      responses:
+        "200":
+          description: Successful Operation
+        "405":
+          description: Invalid input
+  /deleteAccount:
+    delete:
+      tags:
+      - deleteAccount
+      summary: Deletes an existing user.
+      description: This endpoint uses a delete request to delete a user.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: reviewId
+        in: path
+        description: ID of user to be deleted.
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Successful Operation
+        "404":
+          description: User not found
+definitions:
+  Ad:
+    type: object
+    properties:
+      author:
+        type: string
+      datePosted:
+        type: string
+      description:
+        type: string
+        format: date-time
+      status:
+        type: string
+        description: Availability of Textbook
+        enum:
+        - available
+        - unavailable
+      textbookTitle:
+        type: string
+      userID:
+        type: string
+        description: id of user that posted ad
+  Review:
+    type: object
+    properties:
+      adId:
+        type: string
+      dateAdded:
+        type: string
+        format: date-time
+      dateModified:
+        type: string
+        format: date-time
+      reviewText:
+        type: string
+      textbookTitle:
+        type: string
+      userID:
+        type: string
+        description: id of user that posted review
+  User:
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+  Login:
+    type: object
+  CreateAccount:
+    type: object
+  DeleteAccount:
+    type: object

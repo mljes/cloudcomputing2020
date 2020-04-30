@@ -1,0 +1,14 @@
+{
+  "name": "project-api-docs",
+  "version": "1.0.0",
+  "dependencies": {
+    "@redocly/openapi-cli": "^0.8.3"
+  },
+  "private": true,
+  "scripts": {
+    "start": "openapi preview-docs",
+    "build": "openapi bundle -o dist",
+    "test": "openapi validate",
+    "api": "./serve_api.sh"
+  }
+}

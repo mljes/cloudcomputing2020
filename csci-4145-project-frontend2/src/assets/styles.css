@@ -1,0 +1,24 @@
+/* Homepage Styles */
+
+div.title {
+  text-align: center;
+}
+.slide {
+  max-width: 1200px;
+  height: 450px;
+  margin:auto;
+}
+
+.card-holder{
+  margin-top: 20px;
+}
+
+.card-btn{
+  width: 100%;
+  background-color:  #212529 !important;
+  border-color:  #212529 !important;
+}
+
+body {
+  font-family: 'Baloo Chettan 2', cursive !important;
+}

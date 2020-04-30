@@ -1,0 +1,6 @@
+# Dir for bundles
+dist
+node_modules
+__pycache__/
+venv/
+nohup.out

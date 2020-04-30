@@ -1,0 +1,7 @@
+Flask
+pathlib
+pyrebase
+flask_cors
+flask_api
+pyjwt
+firebase_admin
